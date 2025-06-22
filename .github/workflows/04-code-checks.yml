@@ -2,7 +2,8 @@ name: Code checks
 
 on:
   pull_request:
-
+  workflow_dispatch:
+    
 jobs:
   linting:
     name: Linting
