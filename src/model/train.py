@@ -10,6 +10,8 @@ from sklearn.model_selection import train_test_split
 import mlflow.sklearn
 
 # define functions
+
+
 def main(args):
     # TO DO: enable autologging
     mlflow.sklearn.autolog()
@@ -34,11 +36,12 @@ def get_csvs_df(path):
 
 
 def split_data(df):
-    X = df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure',
-            'TricepsThickness','SerumInsulin','BMI',
-            'DiabetesPedigree','Age']].values
+    X = df[['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure' ,
+            'TricepsThickness', 'SerumInsulin', 'BMI', 
+            'DiabetesPedigree', 'Age']].values
     y = df['Diabetic'].values
     return train_test_split(X, y, test_size=0.30, random_state=0)
+
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
@@ -60,6 +63,7 @@ def parse_args():
 
     # return args
     return args
+
 
 # run script
 if __name__ == "__main__":
