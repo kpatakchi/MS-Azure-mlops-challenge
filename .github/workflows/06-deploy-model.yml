@@ -26,7 +26,7 @@ jobs:
             --name diabetes-endpoint \
             --resource-group RG1 \
             --workspace-name Azure_MLOps_Challenge \
-            --file src/deploy/endpoint.yml || echo "Endpoint may already exist."
+            --file src/endpoint.yml || echo "Endpoint may already exist."
 
       - name: Deploy Model to Endpoint
         run: |
@@ -37,7 +37,7 @@ jobs:
             --resource-group RG1 \
             --workspace-name Azure_MLOps_Challenge \
             --all-traffic \
-            --file src/deploy/deployment.yml
+            --file src/deployment.yml
             
       - name: Test the deployed model
         run: |
