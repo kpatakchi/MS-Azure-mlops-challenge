@@ -25,6 +25,9 @@ jobs:
       - name: Print working directory
         run: pwd
         
+      - name: List files in repo root
+        run: ls -R
+      
       - name: Trigger training in Dev
         run: |
           az ml job create \
