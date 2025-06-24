@@ -38,3 +38,11 @@ jobs:
             --workspace-name Azure_MLOps_Challenge \
             --all-traffic \
             --file src/deploy/deployment.yml
+            
+      - name: Test the deployed model
+        run: |
+          az ml online-endpoint invoke \
+            --name diabetes-endpoint \
+            --resource-group RG1 \
+            --workspace-name Azure_MLOps_Challenge \
+            --request-file endpoint-tests/sample_data.json
