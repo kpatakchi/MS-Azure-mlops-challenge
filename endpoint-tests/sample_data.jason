@@ -1,0 +1,32 @@
+[
+  {
+    "Pregnancies": 9,
+    "PlasmaGlucose": 104,
+    "DiastolicBloodPressure": 51,
+    "TricepsThickness": 7,
+    "SerumInsulin": 24,
+    "BMI": 27.36983156,
+    "DiabetesPedigree": 1.350472047,
+    "Age": 43
+  },
+  {
+    "Pregnancies": 6,
+    "PlasmaGlucose": 73,
+    "DiastolicBloodPressure": 61,
+    "TricepsThickness": 35,
+    "SerumInsulin": 24,
+    "BMI": 18.74367404,
+    "DiabetesPedigree": 1.074147566,
+    "Age": 75
+  },
+  {
+    "Pregnancies": 4,
+    "PlasmaGlucose": 115,
+    "DiastolicBloodPressure": 50,
+    "TricepsThickness": 29,
+    "SerumInsulin": 243,
+    "BMI": 34.69215364,
+    "DiabetesPedigree": 0.741159926,
+    "Age": 59
+  }
+]
