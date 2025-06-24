@@ -1,0 +1,40 @@
+name: Deploy Registered Model
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Set up Azure CLI
+        run: az extension add -n ml -y
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create Endpoint (if not exists)
+        run: |
+          az ml online-endpoint create \
+            --name diabetes-endpoint \
+            --resource-group RG1 \
+            --workspace-name Azure_MLOps_Challenge \
+            --file src/deploy/endpoint.yml || echo "Endpoint may already exist."
+
+      - name: Deploy Model to Endpoint
+        run: |
+          az ml online-deployment create \
+            --name blue \
+            --endpoint-name diabetes-endpoint \
+            --model azureml:diabetes-model@latest \
+            --resource-group RG1 \
+            --workspace-name Azure_MLOps_Challenge \
+            --all-traffic \
+            --file src/deploy/deployment.yml
