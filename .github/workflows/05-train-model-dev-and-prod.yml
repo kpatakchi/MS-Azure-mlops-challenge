@@ -1,0 +1,56 @@
+name: Train Model - Dev and Prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  experiment:
+    name: Train in Development
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Azure ML extension
+        run: az extension add -n ml -y
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Trigger training in Dev
+        run: |
+          az ml job create \
+            --file src/job-dev.yml \
+            --resource-group RG1 \
+            --workspace-name Azure_MLOps_Challenge \
+            --stream
+
+  production:
+    name: Train in Production
+    runs-on: ubuntu-latest
+    environment: production
+    needs: experiment
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Azure ML extension
+        run: az extension add -n ml -y
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Trigger training in Prod
+        run: |
+          az ml job create \
+            --file src/job-prod.yml \
+            --resource-group RG1 \
+            --workspace-name Azure_MLOps_Challenge \
+            --stream
